@@ -5,10 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Wedding Day — Павел & Елена</title>
 
-<!-- Шрифты: Great Vibes (курсив с завитками) + Cormorant Garamond (имена) -->
+<!-- Красивые шрифты: Parisienne (каллиграфия) + Bodoni Moda (имена, italic) -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,500;1,6..96,400;1,6..96,500&display=swap" rel="stylesheet">
 
 <style>
   * {
@@ -28,7 +28,7 @@
     height: 100vh;
     min-height: 600px;
 
-    /* Картинка 1.png как фон */
+    /* Картинка 1.png как фон (без затемнения) */
     background-image: url('1.png');
     background-size: cover;
     background-position: center;
@@ -43,105 +43,82 @@
     overflow: hidden;
   }
 
-  /* Затемнение фона для читаемости текста */
-  .hero::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.35);
-    z-index: 1;
-  }
-
   .hero-content {
     position: relative;
     z-index: 2;
     padding: 20px;
-    animation: fadeUp 1.6s ease-out both;
+    transform: rotate(-2deg); /* лёгкий наклон всей композиции */
   }
 
-  /* ===== "Wedding Day" — курсив с завитками ===== */
+  /* ===== "Wedding Day" — изящная каллиграфия ===== */
   .wedding-day {
-    font-family: 'Great Vibes', cursive;
-    font-size: clamp(3.5rem, 12vw, 9rem);
-    color: #fff;
-    line-height: 1.1;
-    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
-    margin-bottom: 0.2em;
-  }
-
-  /* Декоративные завитки по бокам */
-  .wedding-day::before,
-  .wedding-day::after {
-    content: '❦';
-    font-size: 0.35em;
-    vertical-align: middle;
-    opacity: 0.85;
-    margin: 0 0.3em;
+    font-family: 'Parisienne', cursive;
+    font-size: clamp(4rem, 15vw, 10rem);
+    color: #ffffff;
+    line-height: 1;
+    letter-spacing: 0.02em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    margin-bottom: 0.15em;
+    display: inline-block;
+    transform: rotate(-3deg);
   }
 
   /* Тонкая линия-разделитель */
   .divider {
-    width: 120px;
+    width: 110px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.7);
-    margin: 20px auto 30px;
+    background: rgba(255, 255, 255, 0.75);
+    margin: 14px auto 26px;
   }
 
-  /* ===== Имена — другой шрифт ===== */
+  /* ===== Имена — Bodoni Moda italic ===== */
   .names {
-    font-family: 'Cormorant Garamond', serif;
-    font-weight: 300;
-    font-size: clamp(1.8rem, 6vw, 4rem);
-    color: #fff;
-    letter-spacing: 0.25em;
-    text-transform: uppercase;
-    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
-    margin-bottom: 0.6em;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
+    font-weight: 400;
+    font-size: clamp(1.8rem, 6vw, 3.8rem);
+    color: #ffffff;
+    letter-spacing: 0.12em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
+    margin-bottom: 0.7em;
+    display: inline-block;
+    transform: rotate(-1.5deg);
   }
 
   .names .amp {
     display: inline-block;
-    font-family: 'Great Vibes', cursive;
-    font-size: 1.3em;
-    letter-spacing: 0;
-    vertical-align: middle;
-    margin: 0 0.15em;
-    text-transform: none;
+    font-style: italic;
+    font-weight: 500;
+    opacity: 0.9;
+    margin: 0 0.25em;
   }
 
   /* ===== Дата ===== */
   .date {
-    font-family: 'Cormorant Garamond', serif;
+    font-family: 'Bodoni Moda', serif;
+    font-style: italic;
     font-weight: 400;
-    font-size: clamp(1.1rem, 3vw, 1.8rem);
-    color: #fff;
-    letter-spacing: 0.4em;
-    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+    font-size: clamp(1rem, 2.6vw, 1.5rem);
+    color: #ffffff;
+    letter-spacing: 0.35em;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.35);
   }
 
-  /* ===== Анимация появления ===== */
-  @keyframes fadeUp {
-    from {
-      opacity: 0;
-      transform: translateY(40px);
-    }
-    to {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  }
-
-  /* Плавное появление элементов по очереди (через JS) */
+  /* ===== Плавное поочерёдное появление ===== */
   .wedding-day, .divider, .names, .date {
     opacity: 0;
-    transform: translateY(30px);
     transition: opacity 1.2s ease, transform 1.2s ease;
   }
 
-  .visible {
-    opacity: 1 !important;
-    transform: translateY(0) !important;
-  }
+  .wedding-day { transform: rotate(-3deg) translateY(30px); }
+  .divider     { transform: translateY(30px); }
+  .names       { transform: rotate(-1.5deg) translateY(30px); }
+  .date        { transform: translateY(30px); }
+
+  .wedding-day.visible { opacity: 1; transform: rotate(-3deg) translateY(0); }
+  .divider.visible     { opacity: 1; transform: translateY(0); }
+  .names.visible       { opacity: 1; transform: rotate(-1.5deg) translateY(0); }
+  .date.visible        { opacity: 1; transform: translateY(0); }
 </style>
 </head>
 <body>
@@ -158,7 +135,6 @@
   </section>
 
   <script>
-    // Плавное поочерёдное появление текста
     document.addEventListener('DOMContentLoaded', () => {
       const items = document.querySelectorAll('.wedding-day, .divider, .names, .date');
       items.forEach((el, i) => {
