@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wedding Day — Павел & Елена</title>
+
+<!-- Шрифты: Great Vibes (курсив с завитками) + Cormorant Garamond (имена) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:wght@300;400;600&display=swap" rel="stylesheet">
+
+<style>
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html, body {
+    height: 100%;
+  }
+
+  /* ===== Первый экран ===== */
+  .hero {
+    position: relative;
+    width: 100%;
+    height: 100vh;
+    min-height: 600px;
+
+    /* Картинка 1.png как фон */
+    background-image: url('1.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+
+    overflow: hidden;
+  }
+
+  /* Затемнение фона для читаемости текста */
+  .hero::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.35);
+    z-index: 1;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 20px;
+    animation: fadeUp 1.6s ease-out both;
+  }
+
+  /* ===== "Wedding Day" — курсив с завитками ===== */
+  .wedding-day {
+    font-family: 'Great Vibes', cursive;
+    font-size: clamp(3.5rem, 12vw, 9rem);
+    color: #fff;
+    line-height: 1.1;
+    text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.2em;
+  }
+
+  /* Декоративные завитки по бокам */
+  .wedding-day::before,
+  .wedding-day::after {
+    content: '❦';
+    font-size: 0.35em;
+    vertical-align: middle;
+    opacity: 0.85;
+    margin: 0 0.3em;
+  }
+
+  /* Тонкая линия-разделитель */
+  .divider {
+    width: 120px;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.7);
+    margin: 20px auto 30px;
+  }
+
+  /* ===== Имена — другой шрифт ===== */
+  .names {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 300;
+    font-size: clamp(1.8rem, 6vw, 4rem);
+    color: #fff;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 0.6em;
+  }
+
+  .names .amp {
+    display: inline-block;
+    font-family: 'Great Vibes', cursive;
+    font-size: 1.3em;
+    letter-spacing: 0;
+    vertical-align: middle;
+    margin: 0 0.15em;
+    text-transform: none;
+  }
+
+  /* ===== Дата ===== */
+  .date {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 400;
+    font-size: clamp(1.1rem, 3vw, 1.8rem);
+    color: #fff;
+    letter-spacing: 0.4em;
+    text-shadow: 0 3px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  /* ===== Анимация появления ===== */
+  @keyframes fadeUp {
+    from {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Плавное появление элементов по очереди (через JS) */
+  .wedding-day, .divider, .names, .date {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease, transform 1.2s ease;
+  }
+
+  .visible {
+    opacity: 1 !important;
+    transform: translateY(0) !important;
+  }
+</style>
+</head>
+<body>
+
+  <section class="hero">
+    <div class="hero-content">
+      <h1 class="wedding-day">Wedding Day</h1>
+      <div class="divider"></div>
+      <h2 class="names">
+        Павел <span class="amp">&amp;</span> Елена
+      </h2>
+      <p class="date">01 / 12 / 2027</p>
+    </div>
+  </section>
+
+  <script>
+    // Плавное поочерёдное появление текста
+    document.addEventListener('DOMContentLoaded', () => {
+      const items = document.querySelectorAll('.wedding-day, .divider, .names, .date');
+      items.forEach((el, i) => {
+        setTimeout(() => el.classList.add('visible'), 300 + i * 400);
+      });
+    });
+  </script>
+
+</body>
+</html>
